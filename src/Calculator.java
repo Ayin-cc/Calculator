@@ -92,6 +92,24 @@ public class Calculator extends Application {
         }
         else if(value.equals("+") || value.equals("-") || value.equals("×") || value.equals("÷") || value.equals("%") || value.equals("^")){
             // 运算符
+            if(!optDisplay.getText().isEmpty()){
+                if(isInputed){
+                    try {
+                        String result = evaluateExpression(Double.parseDouble(tempDisplay.getText()), Double.parseDouble(display.getText()), optDisplay.getText());
+                        tempDisplay.setText(result);
+                    } catch (Exception e) {
+                        display.setText("Error");
+                    }
+                    isInputDouble = false;
+                    isInputed = false;
+                    display.setText("0");
+                    optDisplay.setText(value);
+                }
+                else{
+                    optDisplay.setText(value);
+                }
+                return;
+            }
             tempDisplay.setText(display.getText());
             optDisplay.setText(value);
             display.setText("0");
